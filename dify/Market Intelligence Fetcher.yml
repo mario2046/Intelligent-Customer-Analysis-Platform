@@ -1,0 +1,238 @@
+app:
+  description: ''
+  icon: 🤖
+  icon_background: '#FFEAD5'
+  mode: workflow
+  name: Market Intelligence Fetcher
+  use_icon_as_answer_icon: false
+dependencies:
+- current_identifier: null
+  type: marketplace
+  value:
+    marketplace_plugin_unique_identifier: langgenius/tongyi:0.1.21@df95278866e58c804f16572cfd190dcfd6009a705607307c8b3054ae11640d5d
+    version: null
+kind: app
+version: 0.5.0
+workflow:
+  conversation_variables: []
+  environment_variables: []
+  features:
+    file_upload:
+      allowed_file_extensions:
+      - .JPG
+      - .JPEG
+      - .PNG
+      - .GIF
+      - .WEBP
+      - .SVG
+      allowed_file_types:
+      - image
+      allowed_file_upload_methods:
+      - local_file
+      - remote_url
+      enabled: false
+      fileUploadConfig:
+        attachment_image_file_size_limit: 2
+        audio_file_size_limit: 50
+        batch_count_limit: 5
+        file_size_limit: 15
+        file_upload_limit: 20
+        image_file_batch_limit: 10
+        image_file_size_limit: 10
+        single_chunk_attachment_limit: 10
+        video_file_size_limit: 100
+        workflow_file_upload_limit: 10
+      image:
+        enabled: false
+        number_limits: 3
+        transfer_methods:
+        - local_file
+        - remote_url
+      number_limits: 3
+    opening_statement: ''
+    retriever_resource:
+      enabled: true
+    sensitive_word_avoidance:
+      enabled: false
+    speech_to_text:
+      enabled: false
+    suggested_questions: []
+    suggested_questions_after_answer:
+      enabled: false
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: start
+        targetType: http-request
+      id: 1769670331100-source-1769670374429-target
+      source: '1769670331100'
+      sourceHandle: source
+      target: '1769670374429'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: http-request
+        targetType: llm
+      id: 1769670374429-source-1769736890761-target
+      selected: false
+      source: '1769670374429'
+      sourceHandle: source
+      target: '1769736890761'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: llm
+        targetType: end
+      id: 1769736890761-source-1769679643942-target
+      source: '1769736890761'
+      sourceHandle: source
+      target: '1769679643942'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    nodes:
+    - data:
+        selected: true
+        title: User Input
+        type: start
+        variables:
+        - default: ''
+          hint: ''
+          label: customer_name
+          max_length: 60
+          options: []
+          placeholder: ''
+          required: true
+          type: text-input
+          variable: customer_name
+      height: 109
+      id: '1769670331100'
+      position:
+        x: 49.119035183468725
+        y: 257.7351296970462
+      positionAbsolute:
+        x: 49.119035183468725
+        y: 257.7351296970462
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        authorization:
+          config: null
+          type: no-auth
+        body:
+          data: []
+          type: none
+        desc: Retrieve market intelligence for the customer's industry
+        headers: ''
+        method: get
+        params: ''
+        retry_config:
+          max_retries: 3
+          retry_enabled: false
+          retry_interval: 1129
+        selected: false
+        ssl_verify: false
+        timeout:
+          connect: 5
+          max_connect_timeout: 0
+          max_read_timeout: 0
+          max_write_timeout: 0
+          read: 5
+          write: 5
+        title: Market Intelligence Fetcher
+        type: http-request
+        url: http://host.docker.internal:8000/market/company/{{#1769670331100.customer_name#}}/news
+        variables: []
+      height: 187
+      id: '1769670374429'
+      position:
+        x: 387.3706025767881
+        y: 278.7351296970462
+      positionAbsolute:
+        x: 387.3706025767881
+        y: 278.7351296970462
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        outputs:
+        - value_selector:
+          - '1769736890761'
+          - text
+          value_type: string
+          variable: body
+        selected: false
+        title: Output
+        type: end
+      height: 88
+      id: '1769679643942'
+      position:
+        x: 1164.6689306225321
+        y: 288.1336842064253
+      positionAbsolute:
+        x: 1164.6689306225321
+        y: 288.1336842064253
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        model:
+          completion_params: {}
+          mode: chat
+          name: qwen-flash
+          provider: langgenius/tongyi/tongyi
+        prompt_template:
+        - id: e773a47d-d4b8-4184-a006-bfaef0ac27b8
+          role: system
+          text: 'You are an assistant to retrieve the market intelligence for customers.
+            You task is to present the below market intelligence data into a human-readable
+            format for user to understand the customer and the market. Don''t need
+            to include introduction, follow-up and summary messages in your reply.
+            Only return customer and market information.
+
+
+            {{#1769670374429.body#}}'
+        selected: false
+        title: LLM
+        type: llm
+        vision:
+          enabled: false
+      height: 88
+      id: '1769736890761'
+      position:
+        x: 777.9855450937912
+        y: 278.7351296970462
+      positionAbsolute:
+        x: 777.9855450937912
+        y: 278.7351296970462
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    viewport:
+      x: 99.15182754871762
+      y: 193.55387489193743
+      zoom: 0.7916876174011854
+  rag_pipeline_variables: []

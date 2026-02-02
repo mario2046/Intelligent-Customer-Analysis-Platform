@@ -1,0 +1,196 @@
+app:
+  description: ''
+  icon: 🤖
+  icon_background: '#FFEAD5'
+  mode: agent-chat
+  name: Customer 360 Agent
+  use_icon_as_answer_icon: false
+dependencies:
+- current_identifier: null
+  type: marketplace
+  value:
+    marketplace_plugin_unique_identifier: langgenius/tongyi:0.1.21@df95278866e58c804f16572cfd190dcfd6009a705607307c8b3054ae11640d5d
+    version: null
+kind: app
+model_config:
+  agent_mode:
+    enabled: true
+    max_iteration: 10
+    prompt: null
+    strategy: function_call
+    tools:
+    - enabled: true
+      isDeleted: false
+      notAuthor: false
+      provider_id: 11399c9d-8b7c-42a7-8066-113f9c968e88
+      provider_name: CRM Fetcher
+      provider_type: workflow
+      tool_label: CRM Fetcher
+      tool_name: crm_fetcher
+      tool_parameters:
+        customer_name: ''
+    - enabled: true
+      isDeleted: false
+      notAuthor: false
+      provider_id: d052d522-70b7-42c6-b42d-846718dbdca9
+      provider_name: Engagement Data Fetcher
+      provider_type: workflow
+      tool_label: Engagement Data Fetcher
+      tool_name: engagement_fetcher
+      tool_parameters:
+        customer_name: ''
+    - enabled: true
+      isDeleted: false
+      notAuthor: false
+      provider_id: 05bc18b1-20bd-40af-9e19-09d168d99561
+      provider_name: Market Intelligence Fetcher
+      provider_type: workflow
+      tool_label: Market Intelligence Fetcher
+      tool_name: market_intel_fetcher
+      tool_parameters:
+        customer_name: ''
+    - enabled: true
+      isDeleted: false
+      notAuthor: false
+      provider_id: fcc52036-52da-405d-8cfd-86c4736d9360
+      provider_name: Product Knowledge Fetcher
+      provider_type: workflow
+      tool_label: Product Knowledge Fetcher
+      tool_name: product_fetcher
+      tool_parameters:
+        product_name: ''
+  annotation_reply:
+    enabled: false
+  chat_prompt_config:
+    prompt:
+    - role: system
+      text: ''
+  completion_prompt_config:
+    conversation_histories_role:
+      assistant_prefix: ''
+      user_prefix: ''
+    prompt:
+      text: ''
+  dataset_configs:
+    datasets:
+      datasets: []
+    retrieval_model: multiple
+    top_k: 4
+  dataset_query_variable: ''
+  external_data_tools: []
+  file_upload:
+    allowed_file_extensions:
+    - .JPG
+    - .JPEG
+    - .PNG
+    - .GIF
+    - .WEBP
+    - .SVG
+    - .MP4
+    - .MOV
+    - .MPEG
+    - .WEBM
+    allowed_file_types: []
+    allowed_file_upload_methods:
+    - remote_url
+    - local_file
+    enabled: false
+    image:
+      detail: high
+      enabled: false
+      number_limits: 3
+      transfer_methods:
+      - remote_url
+      - local_file
+    number_limits: 3
+  model:
+    completion_params:
+      stop: []
+    mode: chat
+    name: qwen-plus-latest
+    provider: langgenius/tongyi/tongyi
+  more_like_this:
+    enabled: false
+  opening_statement: ''
+  pre_prompt: '## Role Definition
+
+    You are an intelligent orchestrator agent for the Customer 360 platform. Your
+    role is to act as the central coordinator that understands user requests, intelligently
+    routes them to appropriate specialized tools, processes the gathered information,
+    and generates comprehensive, actionable responses for customer analysis and recommendations.
+
+
+    ## Core Capabilities
+
+    You have access to the following specialized tools:
+
+    1. CRM Data Fetcher - Retrieves customer profiles, sales history, and pipeline
+    data, also listing all customer name.
+
+    2. Engagement Data Fetcher - Provides marketing event attendance and content engagement
+    history
+
+    3. Market Intelligence Fetcher - Delivers industry news and market trends
+
+    4. Product Knowledge Fetcher - Supplies product information and case studies
+
+
+    ## Behavior Guidelines
+
+    1. Request Analysis
+
+    - Carefully analyze user input to understand the specific customer analysis needs
+
+    - Identify which data sources are most relevant to the request
+
+    - Determine if multiple data sources need to be consulted for a comprehensive
+    response
+
+
+    2. Tool Selection Strategy
+
+    - CRM Data Fetcher: Use when requests involve customer profiles, purchase history,
+    sales pipeline, contact information, or company details. Can also listing all
+    customer name by using company name "ALL".
+
+    - Engagement Data Fetcher: Use when requests involve customer interactions, marketing
+    event attendance, content consumption, or engagement metrics
+
+    - Market Intelligence Fetcher: Use when requests involve industry trends, competitive
+    landscape, market conditions, or external factors affecting the customer
+
+    - Product Knowledge Fetcher: Use when requests involve product details, features,
+    pricing, or case studies. Only these products are available: Cloud Security Suite,
+    Compliance Management Pro, Fraud Detection AI, Operational Efficiency Suite, Scalability
+    Solutions Pro
+
+
+    3. Response Generation
+
+    - Synthesize information from multiple data sources when applicable
+
+    - Provide context-aware responses that connect different data points
+
+    - Maintain professional tone suitable for sales and business development contexts
+
+    - Offer actionable insights and recommendations when appropriate
+
+    - Using Markdown to highlight keywords in the final output'
+  prompt_type: simple
+  retriever_resource:
+    enabled: true
+  sensitive_word_avoidance:
+    configs: []
+    enabled: false
+    type: ''
+  speech_to_text:
+    enabled: false
+  suggested_questions: []
+  suggested_questions_after_answer:
+    enabled: false
+  text_to_speech:
+    enabled: false
+    language: ''
+    voice: ''
+  user_input_form: []
+version: 0.5.0
