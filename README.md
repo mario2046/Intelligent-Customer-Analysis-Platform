@@ -1,6 +1,8 @@
-# Customer 360 Data APIs
+# Intelligent-Customer-Analysis-Platform
 
-This project provides HTTP APIs for customer data including CRM, engagement, market intelligence, and knowledge base information. It serves as a data backend for the Customer 360 platform.
+This project contain HTTP API server and dify parts. THe HTTP server provides HTTP APIs for customer data including CRM, engagement, market intelligence, and knowledge base information. It serves as a data backend for the Customer 360 platform. The dify is the orchestration platform for the agentic application.
+
+Below is the read for the HTTP API server. For dify please refer to the README in the dify folder.
 
 ## Features
 
